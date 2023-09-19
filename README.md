@@ -19,3 +19,8 @@ python3 app.py
 
 ## option選択
 対応する画像が表示されます。
+
+# 実行例
+![capture1](https://github.com/sekkoh/image_web_test/assets/72484680/12abb203-eb80-4bff-add0-3c0016c16b01)
+![capture2](https://github.com/sekkoh/image_web_test/assets/72484680/7d306746-60ce-4a34-967d-1b0aacd95952)
+![capture3](https://github.com/sekkoh/image_web_test/assets/72484680/89f94a10-0acd-4dc7-8d58-b340badccb70)
