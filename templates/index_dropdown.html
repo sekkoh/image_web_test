@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ドロップダウンWebアプリ</title>
+</head>
+<body>
+    <h1>ドロップダウンから選んでください</h1>
+    <form method="POST">
+        <select name="dropdown">
+            <option value="option1">選択肢1</option>
+            <option value="option2">選択肢2</option>
+            <option value="option3">選択肢3</option>
+        </select>
+        <input type="submit" value="選択">
+    </form>
+    <div>
+        {% if message %}
+            <p>{{ message }}</p>
+            <img src="{{ image_path }}" alt="選択した画像">
+        {% endif %}
+    </div>
+</body>
+</html>

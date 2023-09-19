@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>チェックボックスWebアプリ</title>
+    <script type="text/javascript">
+        // 日付選択の制約
+        function validateDate() {
+            var startDate = document.getElementById('start_date').value;
+            var endDate = document.getElementById('end_date').value;
+
+            if (endDate < startDate) {
+                alert('終了日は開始日より前に設定できません。');
+                return false;
+            }
+
+            return true;
+        }
+
+        // 終了日を任意の日数後に設定（デフォルト: 7）
+        function setEndDate() {
+            var startDate = document.getElementById('start_date').valueAsDate;
+            var daysToAdd = parseInt(document.getElementById('days_to_add').value);
+
+            if (startDate && !isNaN(daysToAdd) && daysToAdd >= 1) {
+                var endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + daysToAdd - 1);
+                document.getElementById('end_date').valueAsDate = endDate;
+            } else {
+                alert('日数は1以上である必要があります。');
+            }
+        }
+
+        // チェックボックスがクリックされたときに実行される関数
+        function toggleCheckboxes() {
+            var selectAllCheckbox = document.getElementById('select-all');
+            var checkboxes = document.getElementsByName('option');
+            
+            // 全て選択の状態に応じて選択肢のチェックボックスを変更
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = selectAllCheckbox.checked;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="POST" onsubmit="return validateDate();">
+    <h1>開始日と終了日を選択してください</h1>
+        <label for="start_date">開始日:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        
+        <label for="end_date">終了日:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <label for="days_to_add">期間を入力:</label>
+        <input type="number" id="days_to_add" name="days_to_add" min="1" value="7"><br><br>
+
+        <input type="button" value="終了日を設定" onclick="setEndDate();"><br><br>
+
+    <h1>チェックボックスから選んでください</h1>
+    
+        <input type="checkbox" name="select_all" id="select-all" onclick="toggleCheckboxes()"> 全て選択<br>
+        <input type="checkbox" name="option" value="option1"> 選択肢1<br>
+        <input type="checkbox" name="option" value="option2"> 選択肢2<br>
+        <input type="checkbox" name="option" value="option3"> 選択肢3<br>
+        <input type="submit" value="選択">
+    </form>
+    <div>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        {% for image in images %}
+            <img src="{{ image }}" alt="選択した画像">
+        {% endfor %}
+    </div>
+</body>
+</html>
